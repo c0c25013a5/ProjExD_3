@@ -144,15 +144,24 @@ class Bomb:
         screen.blit(self.img, self.rct)
 
 class Score:
+    """
+    スコアに関するクラス
+    """
     def __init__(self):
         self.score = 0
         self.fonto = pg.font.Font(None, 50)
 
     def update(self, screen: pg.Surface):
+        """
+        スコアを画面に表示する
+        引数 screen：画面Surface"""
         self.img = self.fonto.render(f"Score: {self.score}", True, (0, 0, 255))
         self.rct = self.img.get_rect(center=(100, HEIGHT - 50))
         screen.blit(self.img, self.rct)
 class Explosion:
+    """
+    爆発エフェクトに関するクラス
+    """
     def __init__(self, bomb: Bomb, life: int = 10):
         img = pg.image.load("fig/explosion.gif")
         self.imgs = [img, pg.transform.flip(img, True, True)]
@@ -161,10 +170,14 @@ class Explosion:
         self.life = life
 
     def update(self, screen: pg.Surface):
+        """
+        爆発エフェクトを画面に表示する
+        引数 screen：画面Surface
+        """
         self.life -= 1
         if self.life > 0:
             screen.blit(self.imgs[self.life % len(self.imgs)], self.rct)
-
+            
 
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
